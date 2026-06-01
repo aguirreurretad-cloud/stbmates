@@ -9,6 +9,7 @@ import Catalog from './pages/Catalog'
 import Admin from './pages/Admin'
 import About from './pages/About'
 import References from './pages/References'
+import Recover from './pages/Recover'
 import { ReferencesProvider } from './context/ReferencesContext'
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
               <Route path="/nosotros" element={<About />} />
               <Route path="/referencias" element={<References />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path="/recover" element={<Recover />} />
             </Routes>
           </main>
           <Footer />
