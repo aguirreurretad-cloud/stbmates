@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #060d08;
+    background-image:
+      radial-gradient(at 15% 10%, rgba(22, 163, 74, 0.12) 0px, transparent 55%),
+      radial-gradient(at 85% 85%, rgba(245, 158, 11, 0.07) 0px, transparent 55%);
+    background-attachment: fixed;
+    color: white;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .glass-hover {
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .glass-hover:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .btn-primary {
+    background-color: #22c55e;
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn-primary:hover {
+    background-color: #4ade80;
+    box-shadow: 0 0 24px rgba(34, 197, 94, 0.4);
+  }
+
+  .btn-outline {
+    border: 1px solid rgba(34, 197, 94, 0.5);
+    color: #4ade80;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    transition: background-color 0.2s, border-color 0.2s;
+    cursor: pointer;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn-outline:hover {
+    background-color: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.8);
+  }
+
+  .input-field {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.625rem 1rem;
+    border-radius: 0.75rem;
+    color: white;
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.875rem;
+  }
+  .input-field:focus {
+    border-color: rgba(34, 197, 94, 0.4);
+  }
+  .input-field::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Hero responsive background */
+.hero-bg {
+  background-image: url('/hero-mobile.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+@media (min-width: 768px) {
+  .hero-bg {
+    background-image: url('/hero.jpg');
+  }
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.25); }
