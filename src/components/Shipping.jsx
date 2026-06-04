@@ -15,7 +15,7 @@ export default function Shipping() {
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <Clock size={17} className="text-amber-400" />
-                <span className="text-amber-400 font-semibold text-sm">Envío en 48 horas</span>
+                <span className="text-amber-400 font-semibold text-sm">Envío en 72 horas</span>
               </div>
               <h2 className="text-2xl font-bold text-white">Hacemos envíos con</h2>
             </div>

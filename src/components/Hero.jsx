@@ -4,7 +4,7 @@ import { WHATSAPP_NUMBER } from '../config'
 
 const stats = [
   { icon: Package,    color: 'text-green-400',  bg: 'bg-green-500/15',  value: '50+',    label: 'Productos' },
-  { icon: Truck,      color: 'text-amber-400',  bg: 'bg-amber-500/15',  value: '48hs',   label: 'Envío express' },
+  { icon: Truck,      color: 'text-amber-400',  bg: 'bg-amber-500/15',  value: '72hs',   label: 'Envío express' },
   { icon: BadgeCheck, color: 'text-green-400',  bg: 'bg-green-500/15',  value: '100%',   label: 'Garantizado' },
 ]
 
