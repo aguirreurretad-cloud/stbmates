@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { ShoppingCart, Menu, X } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useCart } from '../context/CartContext'
 import { STORE_NAME } from '../config'
 
@@ -14,10 +14,21 @@ const navLinks = [
 export default function Navbar() {
   const { totalItems, setIsOpen } = useCart()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 glass border-b border-white/[0.06]">
+    <nav className={`fixed top-0 left-0 right-0 z-40 border-b transition-colors duration-200 ${
+      scrolled
+        ? 'bg-[#060d08]/95 backdrop-blur-md border-white/[0.08]'
+        : 'glass border-white/[0.06]'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
 

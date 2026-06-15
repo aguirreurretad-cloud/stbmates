@@ -4,7 +4,7 @@ import { useProducts } from '../context/ProductsContext'
 import { ADMIN_PASSWORD } from '../config'
 import { CATEGORIES } from '../data/products'
 import ProductImage from '../components/ProductImage'
-import { uploadImage } from '../lib/supabase'
+import { uploadImage, supabase } from '../lib/supabase'
 import { useReferences } from '../context/ReferencesContext'
 import ImageUploader from '../components/ImageUploader'
 
@@ -364,7 +364,7 @@ function RefModal({ type, item, onSave, onClose }) {
 }
 
 // ── Panel de Referencias ─────────────────────────────────────────────────────
-function ReferencesPanel({ testimonials, screenshots, celebrities, onAddTestimonial, onEditTestimonial, onDeleteTestimonial, onAddScreenshot, onDeleteScreenshot, onAddCelebrity, onEditCelebrity, onDeleteCelebrity }) {
+function ReferencesPanel({ testimonials, screenshots, celebrities, onAddTestimonial, onEditTestimonial, onDeleteTestimonial, onAddScreenshot, onDeleteScreenshot, onToggleReseller, onAddCelebrity, onEditCelebrity, onDeleteCelebrity }) {
   return (
     <div className="space-y-8">
 
@@ -452,7 +452,7 @@ function ReferencesPanel({ testimonials, screenshots, celebrities, onAddTestimon
                       const { uploadImage } = await import('../lib/supabase')
                       const data = canvas.toDataURL('image/jpeg', 0.82)
                       const publicUrl = await uploadImage(data, 'screenshots')
-                      onAddScreenshot({ image: publicUrl, caption: '' })
+                      onAddScreenshot({ image: publicUrl, caption: '', is_reseller: false })
                       res()
                     }
                     img.src = url
@@ -473,6 +473,15 @@ function ReferencesPanel({ testimonials, screenshots, celebrities, onAddTestimon
                     className="absolute top-1.5 right-1.5 bg-black/70 hover:bg-red-500 text-white p-1.5 rounded-lg cursor-pointer transition-colors opacity-0 group-hover:opacity-100"
                   >
                     <Trash2 size={13} />
+                  </button>
+                  <button
+                    onClick={() => onToggleReseller(s.id, !s.is_reseller)}
+                    title={s.is_reseller ? 'Revendedor (aparece primero)' : 'Marcar como revendedor'}
+                    className={`absolute bottom-1.5 left-1.5 text-[10px] font-bold px-1.5 py-0.5 rounded cursor-pointer transition-colors ${
+                      s.is_reseller ? 'bg-green-500 text-white' : 'bg-black/60 text-gray-400 opacity-0 group-hover:opacity-100'
+                    }`}
+                  >
+                    {s.is_reseller ? '★ Revendedor' : '☆ Marcar'}
                   </button>
                 </div>
               ))}
@@ -507,7 +516,7 @@ function DeleteConfirm({ onConfirm, onCancel }) {
 
 export default function Admin() {
   const { products, addProduct, updateProduct, deleteProduct, resetProducts } = useProducts()
-  const { testimonials, addTestimonial, updateTestimonial, deleteTestimonial, screenshots, addScreenshot, deleteScreenshot, celebrities, addCelebrity, updateCelebrity, deleteCelebrity } = useReferences()
+  const { testimonials, addTestimonial, updateTestimonial, deleteTestimonial, screenshots, addScreenshot, deleteScreenshot, celebrities, addCelebrity, updateCelebrity, deleteCelebrity, loadAll } = useReferences()
   const [tab, setTab] = useState('productos') // 'productos' | 'referencias'
   const [confirmReset, setConfirmReset] = useState(false)
   const [auth, setAuth] = useState(false)
@@ -627,6 +636,7 @@ export default function Admin() {
             onDeleteTestimonial={id => setRefDeleteId({ type: 'testimonial', id })}
             onAddScreenshot={addScreenshot}
             onDeleteScreenshot={id => setRefDeleteId({ type: 'screenshot', id })}
+            onToggleReseller={async (id, val) => { await supabase.from('screenshots').update({ is_reseller: val }).eq('id', id); loadAll() }}
             onAddCelebrity={() => setRefModal({ type: 'celebrity', data: null })}
             onEditCelebrity={c => setRefModal({ type: 'celebrity', data: c })}
             onDeleteCelebrity={id => setRefDeleteId({ type: 'celebrity', id })}

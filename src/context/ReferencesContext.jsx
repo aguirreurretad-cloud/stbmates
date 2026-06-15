@@ -14,7 +14,7 @@ export function ReferencesProvider({ children }) {
   const loadAll = async () => {
     const [t, s, c] = await Promise.all([
       supabase.from('testimonials').select('*').order('id'),
-      supabase.from('screenshots').select('*').order('id'),
+      supabase.from('screenshots').select('*').order('is_reseller', { ascending: false }).order('id'),
       supabase.from('celebrities').select('*').order('id'),
     ])
 
@@ -77,6 +77,7 @@ export function ReferencesProvider({ children }) {
       testimonials, addTestimonial, updateTestimonial, deleteTestimonial,
       screenshots, addScreenshot, deleteScreenshot,
       celebrities, addCelebrity, updateCelebrity, deleteCelebrity,
+      loadAll,
     }}>
       {children}
     </Ctx.Provider>

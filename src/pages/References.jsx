@@ -67,7 +67,7 @@ export default function References() {
               </div>
               <h2 className="text-3xl font-bold text-white mb-3">Los eligen los mejores</h2>
               <p className="text-gray-500 max-w-xl mx-auto">
-                Personalidades que ya tienen un mate STB en sus manos.
+                Estos mates ya los piden. Sumalos a tu negocio y vendé lo que la gente busca.
               </p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
