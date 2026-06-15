@@ -5,7 +5,7 @@ import { WHATSAPP_NUMBER } from '../config'
 const stats = [
   { icon: Package,    color: 'text-green-400',  bg: 'bg-green-500/15',  value: '50+',    label: 'Productos' },
   { icon: Truck,      color: 'text-amber-400',  bg: 'bg-amber-500/15',  value: '72hs',   label: 'Envío express' },
-  { icon: BadgeCheck, color: 'text-green-400',  bg: 'bg-green-500/15',  value: '100%',   label: 'Garantizado' },
+  { icon: BadgeCheck, color: 'text-green-400',  bg: 'bg-green-500/15',  value: '100%',   label: 'Garantía por fallas' },
 ]
 
 export default function Hero() {
@@ -48,8 +48,8 @@ export default function Hero() {
           </h1>
 
           <p className="text-gray-300 text-lg leading-relaxed mb-8">
-            Mates y bombillas al por mayor. Precios imbatibles,
-            calidad garantizada. Ideal para revendedores y emprendedores.
+            Mates y bombillas al por mayor, directo de fábrica. Sin intermediarios,
+            con stock real y garantía. Ideal para revendedores y para los que recién arrancan.
           </p>
 
           {/* CTAs */}
